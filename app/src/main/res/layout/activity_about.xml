@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/window_padding"
+    android:background="@mipmap/ic_launcher"
+    android:backgroundTint="@color/primary_text">
+
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Version: 1.0.0"
+        android:textSize="16dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tvDeveloper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Developer: Geisy Domiciano"
+        android:textSize="16dp"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:id="@+id/tvClass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Class: 9MOB"
+        android:textSize="16dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tvRM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RM: 40072"
+        android:textSize="16dp"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

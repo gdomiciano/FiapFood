@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="cb_connected">Keep Connected</string>
+    <string name="err_login">Invalid username or password</string>
+    <string name="bt_add">Add New Restaurant</string>
+    <string name="bt_see_all">See All Restaurants</string>
+    <string name="bt_see_map">See restaurants on the map</string>
+    <string name="bt_about">About</string>
+    <string name="txt_start">Login or register to start!</string>
+    <string name="bt_login">Login/Register</string>
+    <string name="wait_title">Wait..</string>
+    <string name="get_data">Getting initial data...</string>
+</resources>

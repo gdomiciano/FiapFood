@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground"
+    card_view:cardBackgroundColor="#FFFFFF"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/ivRestaurant"
+                    android:layout_width="250dp"
+                    android:layout_height="100dp"
+                    android:padding="16dp"
+                    android:scaleType="centerCrop" />
+                <ProgressBar
+                    android:id="@+id/pbRestaurant"
+                    style="@android:style/Widget.ProgressBar.Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_vertical"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center|center_vertical"
+                    android:visibility="invisible" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvRestaurantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:layout_marginTop="20dp"
+                android:background="@color/overlay"
+                android:padding="@dimen/general_padding"
+                android:text="Restaurant Name"
+                android:textColor="@color/primary_light"
+                android:textSize="22sp" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+
+            <TextView
+                android:layout_weight="0.1"
+                android:id="@+id/tvRestaurantType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:padding="16dp" />
+
+            <ImageView
+                android:id="@+id/ivOptions"
+                android:padding="8dp"
+                android:layout_weight="0.9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_more" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>
