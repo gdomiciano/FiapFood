@@ -1,76 +1,83 @@
 package br.com.fiap.daa.fiapfood.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.os.Bundle;
+import android.os.Environment;
+import android.renderscript.Allocation;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.File;
 import java.util.List;
 
+import br.com.fiap.daa.fiapfood.EditRestaurantActivity;
 import br.com.fiap.daa.fiapfood.R;
+import br.com.fiap.daa.fiapfood.RestaurantsActivity;
 import br.com.fiap.daa.fiapfood.model.Restaurant;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by geisy_000 on 2/10/2016.
  */
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.RestaurantViewHolder>{
 
-private Context c;
-private List<Restaurant> restaurants;
+    private Context c;
+    private List<Restaurant> restaurants;
 
 public static class RestaurantViewHolder extends RecyclerView.ViewHolder{
-    TextView tvRestaurantName, tvRestaurantType;
-    ImageView ivRestaurant, ivOptions;
+    @Bind(R.id.tvRestaurantName) TextView tvRestaurantName;
+    @Bind(R.id.tvRestaurantType) TextView tvRestaurantType;
+    @Bind(R.id.ivRestaurant) ImageView ivRestaurant;
+    @Bind(R.id.ibtDelete) ImageButton ibtDelete;
+    @Bind(R.id.ibtEdit) ImageButton ibtEdit;
+    @Bind(R.id.pbRestaurant)  ProgressBar pbRestaurant;
 
-    ProgressBar pbRestaurant;
-    public RestaurantViewHolder(View itemView) {
+
+
+    public RestaurantViewHolder(final View itemView) {
         super(itemView);
-
-        this.tvRestaurantName = (TextView) itemView.findViewById(R.id.tvRestaurantName);
-        this.tvRestaurantType = (TextView) itemView.findViewById(R.id.tvRestaurantType);
-        this.ivRestaurant = (ImageView) itemView.findViewById(R.id.ivRestaurant);
-        this.ivOptions = (ImageView) itemView.findViewById(R.id.ivOptions);
-        this.pbRestaurant = (ProgressBar) itemView.findViewById(R.id.pbRestaurant);
+        ButterKnife.bind(this, itemView);
     }
 }
-
-    //Classes Construtoras:
 
     public RestaurantAdapter(Context c, List<Restaurant> restaurants){
         this.c = c;
         this.restaurants = restaurants;
     }
 
-
-    // Classes referente ao adapter:
     @Override
     public RestaurantViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(c).inflate(R.layout.restaurant_item, parent, false);  //usamos o inflater para trocar o layout padrao do android para carregar o nosso
+        View v = LayoutInflater.from(c).inflate(R.layout.restaurant_item, parent, false);
         return new RestaurantViewHolder(v);
+
     }
 
     @Override
-    public void onBindViewHolder(RestaurantViewHolder holder, int position) {
+    public void onBindViewHolder(RestaurantViewHolder holder, int position)  {
 
-        //fazendo a troca de informações consultando a lista gerada de acordo com as informações do Json
         holder.tvRestaurantName.setText(restaurants.get(position).getName());
         holder.tvRestaurantType.setText(restaurants.get(position).getType());
-
-        //como carregar as imagens vindas de assets:
-        try {
-            InputStream is = c.getAssets().open(restaurants.get(position).getPicture());
-            Drawable carPhoto = Drawable.createFromStream(is, null);
-            holder.ivRestaurant.setImageDrawable(carPhoto);
-        } catch (IOException e) {
-            e.printStackTrace();
+        File file = new File(restaurants.get(position).getPicture());
+        if(file.exists()){
+            String picPath = file.toString();
+            Drawable restaurantPicture = Drawable.createFromPath(picPath);
+            holder.ivRestaurant.setImageDrawable(restaurantPicture);
+        }else {
+            holder.ivRestaurant.setImageResource(R.mipmap.ic_launcher);
         }
+
 
     }
 
@@ -78,6 +85,7 @@ public static class RestaurantViewHolder extends RecyclerView.ViewHolder{
     public int getItemCount() {
         return restaurants.size();
     }
+
 
 
 }

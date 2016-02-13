@@ -1,45 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/window_padding">
-
-    <Button
-        android:id="@+id/btNew"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/bt_add"
-        android:layout_gravity="center_horizontal"
-        android:padding="@dimen/button_padding"
-        android:layout_margin="@dimen/general_margin"/>
+        android:layout_height="match_parent"
+        android:padding="@dimen/window_padding">
 
-    <Button
-        android:id="@+id/btSeeAll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/bt_see_all"
-        android:layout_gravity="center_horizontal"
-        android:padding="@dimen/button_padding"
-        android:layout_margin="@dimen/general_margin"/>
+        <Button
+            android:id="@+id/btNew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bt_add"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/button_padding"
+            android:layout_margin="@dimen/general_margin"/>
 
-    <Button
-        android:id="@+id/btSeeMap"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/bt_see_map"
-        android:layout_gravity="center_horizontal"
-        android:padding="@dimen/button_padding"
-        android:layout_margin="@dimen/general_margin"/>
+        <Button
+            android:id="@+id/btSeeAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bt_see_all"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/button_padding"
+            android:layout_margin="@dimen/general_margin"/>
 
-    <Button
-        android:id="@+id/btAbout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/bt_about"
-        android:layout_gravity="center_horizontal"
-        android:padding="@dimen/button_padding"
-        android:layout_margin="@dimen/general_margin"/>
+        <Button
+            android:id="@+id/btSeeMap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bt_see_map"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/button_padding"
+            android:layout_margin="@dimen/general_margin"/>
+
+        <Button
+            android:id="@+id/btAbout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bt_about"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/button_padding"
+            android:layout_margin="@dimen/general_margin"/>
 
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

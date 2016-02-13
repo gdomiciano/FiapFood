@@ -47,4 +47,11 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(MainActivity.this, RestaurantsActivity.class);
         startActivity(i);
     }
+
+    @OnClick(R.id.btNew)
+    public void goAdd(){
+        Intent i = new Intent(MainActivity.this, AddRestaurantActivity.class);
+        startActivity(i);
+
+    }
 }

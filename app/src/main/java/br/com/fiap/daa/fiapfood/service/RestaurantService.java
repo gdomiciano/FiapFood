@@ -98,9 +98,8 @@ public class RestaurantService extends AsyncTask<String, Void, List<Restaurant>>
 
             inputStream.close();
             result = sBuilder.toString();
-            List<Restaurant> restaurants = getRestaurants(result);
 
-            return restaurants;
+            return getRestaurants(result);
         } catch (Exception e) {
             Log.e("StringBuilding & BufferedReader", "Error converting result " + e.toString());
         }

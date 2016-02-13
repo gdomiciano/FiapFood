@@ -46,7 +46,7 @@ public class RestaurantDAO {
 
         db = database.getWritableDatabase();
 
-        long result = db.insert(database.TABLE_RESTAURANT, null, values);
+        long result = db.insert(DB.TABLE_RESTAURANT, null, values);
 
         db.close();
 
@@ -71,7 +71,7 @@ public class RestaurantDAO {
         Log.d("oi", String.valueOf(restaurant.getId()));
         db = database.getWritableDatabase();
 
-        long result = db.update(database.TABLE_RESTAURANT, values, ID + " = " + restaurant.getId(), null);
+        long result = db.update(DB.TABLE_RESTAURANT, values, ID + " = " + restaurant.getId(), null);
 
         db.close();
 
@@ -87,7 +87,7 @@ public class RestaurantDAO {
         Cursor cursor;
 
         db = database.getReadableDatabase();
-        cursor = db.query(database.TABLE_RESTAURANT, null, null, null, null, null, null);
+        cursor = db.query(DB.TABLE_RESTAURANT, null, null, null, null, null, null);
 
         if (cursor != null) {
             cursor.moveToFirst();

@@ -1,9 +1,11 @@
 package br.com.fiap.daa.fiapfood.model;
 
+import java.io.Serializable;
+
 /**
  * Created by geisy_000 on 2/9/2016.
  */
-public class Restaurant {
+public class Restaurant implements Serializable {
     public int id;
     private String picture;
     public String name;
