@@ -1,20 +1,14 @@
 package br.com.fiap.daa.fiapfood;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.ImageButton;
 
 import br.com.fiap.daa.fiapfood.DAO.RestaurantDAO;
 import br.com.fiap.daa.fiapfood.adapter.RestaurantAdapter;
-import br.com.fiap.daa.fiapfood.model.Restaurant;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by geisy_000 on 2/10/2016.

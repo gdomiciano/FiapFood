@@ -61,14 +61,11 @@ public class EditRestaurantActivity extends AppCompatActivity {
 
         restaurant = (Restaurant) getIntent().getExtras().getSerializable("restaurant");
         if (restaurant != null) {
-            if (!restaurant.getPicture().equals("")) {
-
-                ivPreview.setVisibility(View.VISIBLE);
-            }
             ivPreview.setImageDrawable(Drawable.createFromPath(restaurant.getPicture()));
+            ivPreview.setVisibility(View.VISIBLE);
             etRestaurantName.setText(restaurant.getName(), TextView.BufferType.EDITABLE);
             etRestaurantPhone.setText(restaurant.getPhone(), TextView.BufferType.EDITABLE);
-            spType.setSelection(((ArrayAdapter<String>) spType.getAdapter()).getPosition(restaurant.getType()));
+//            spType.setSelection(((ArrayAdapter<CharSequence>) spType.getAdapter()).getPosition(restaurant.getType()));
             etRestaurantPrice.setText(String.valueOf(restaurant.getPrice()), TextView.BufferType.EDITABLE);
             etRestaurantLat.setText(restaurant.getLat(), TextView.BufferType.EDITABLE);
             etRestaurantLon.setText(restaurant.getLon(), TextView.BufferType.EDITABLE);

@@ -3,11 +3,6 @@ package br.com.fiap.daa.fiapfood.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.os.Bundle;
-import android.os.Environment;
-import android.renderscript.Allocation;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +17,9 @@ import java.util.List;
 
 import br.com.fiap.daa.fiapfood.EditRestaurantActivity;
 import br.com.fiap.daa.fiapfood.R;
-import br.com.fiap.daa.fiapfood.RestaurantsActivity;
 import br.com.fiap.daa.fiapfood.model.Restaurant;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by geisy_000 on 2/10/2016.
@@ -35,22 +28,24 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
     private Context c;
     private List<Restaurant> restaurants;
+    Restaurant restaurant;
 
-public static class RestaurantViewHolder extends RecyclerView.ViewHolder{
-    @Bind(R.id.tvRestaurantName) TextView tvRestaurantName;
-    @Bind(R.id.tvRestaurantType) TextView tvRestaurantType;
-    @Bind(R.id.ivRestaurant) ImageView ivRestaurant;
-    @Bind(R.id.ibtDelete) ImageButton ibtDelete;
-    @Bind(R.id.ibtEdit) ImageButton ibtEdit;
-    @Bind(R.id.pbRestaurant)  ProgressBar pbRestaurant;
+    public static class RestaurantViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.tvRestaurantName) TextView tvRestaurantName;
+        @Bind(R.id.tvRestaurantType) TextView tvRestaurantType;
+        @Bind(R.id.ivRestaurant) ImageView ivRestaurant;
+        @Bind(R.id.ibtDelete) ImageButton ibtDelete;
+        @Bind(R.id.ibtEdit) ImageButton ibtEdit;
+        @Bind(R.id.pbRestaurant)  ProgressBar pbRestaurant;
 
 
 
-    public RestaurantViewHolder(final View itemView) {
-        super(itemView);
-        ButterKnife.bind(this, itemView);
+        public RestaurantViewHolder(final View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+
     }
-}
 
     public RestaurantAdapter(Context c, List<Restaurant> restaurants){
         this.c = c;
@@ -65,7 +60,7 @@ public static class RestaurantViewHolder extends RecyclerView.ViewHolder{
     }
 
     @Override
-    public void onBindViewHolder(RestaurantViewHolder holder, int position)  {
+    public void onBindViewHolder(final RestaurantViewHolder holder, final int position)  {
 
         holder.tvRestaurantName.setText(restaurants.get(position).getName());
         holder.tvRestaurantType.setText(restaurants.get(position).getType());
@@ -77,7 +72,15 @@ public static class RestaurantViewHolder extends RecyclerView.ViewHolder{
         }else {
             holder.ivRestaurant.setImageResource(R.mipmap.ic_launcher);
         }
-
+        holder.ibtEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), EditRestaurantActivity.class);
+                restaurant = (Restaurant) restaurants.get(position) ;
+                i.putExtra("restaurant", restaurant);
+                v.getContext().startActivity(i);
+            }
+        });
 
     }
 
