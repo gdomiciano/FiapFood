@@ -124,7 +124,10 @@ public class AddRestaurantActivity extends AppCompatActivity {
         RestaurantDAO crud = new RestaurantDAO(v.getContext());
 
         Restaurant restaurant = new Restaurant();
-        restaurant.setPicture(picRestaurantPath);
+        if (picRestaurantPath != null){
+            restaurant.setPicture(picRestaurantPath);
+        }
+//        restaurant.setPicture(picRestaurantPath);
         restaurant.setName(tlRestaurantName.getEditText().getText().toString());
         restaurant.setPhone(tlRestaurantPhone.getEditText().getText().toString());
         restaurant.setType(spType.getSelectedItem().toString());
@@ -138,6 +141,7 @@ public class AddRestaurantActivity extends AppCompatActivity {
         Intent i = new Intent(AddRestaurantActivity.this, RestaurantsActivity.class);
         startActivity(i);
         Toast.makeText(this, "Restaurant was saved!",Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @OnItemSelected(R.id.spType)
