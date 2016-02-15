@@ -31,4 +31,5 @@
         <item>@string/type_undefined</item>
         <item>@string/type_nao_sei</item>
     </string-array>
+    <string name="title_activity_restaurants_map">FiapFood</string>
 </resources>

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Typeface iconFont = FontsManager.getTypeface(getApplicationContext(), FontsManager.FONTAWESOME);
         FontsManager.markAsIconContainer(findViewById(R.id.icons_container), iconFont);
-        new RestaurantService(MainActivity.this).execute("http://heiderlopes.com.br/restaurantes/restaurantes.json");
+
 
 
 
@@ -53,5 +53,11 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(MainActivity.this, AddRestaurantActivity.class);
         startActivity(i);
 
+    }
+
+    @OnClick(R.id.btSeeMap)
+    public void goMap(){
+        Intent i = new Intent(MainActivity.this, RestaurantsMap.class);
+        startActivity(i);
     }
 }

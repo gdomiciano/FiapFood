@@ -128,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean(KEEPCONNECTED,connected);
         editor.commit();
+        new RestaurantService(LoginActivity.this).execute("http://heiderlopes.com.br/restaurantes/restaurantes.json");
     }
 
     private boolean isConnected() {

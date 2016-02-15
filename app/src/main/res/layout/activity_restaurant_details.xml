@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivRestaurantDetail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="center"
+        android:src="@mipmap/ic_launcher"
+        />
+    <TextView
+        android:id="@+id/nameRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:text="Nome"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        />
+    <TextView
+        android:id="@+id/priceRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="price"
+        android:textColor="@color/primary_text"
+        />
+    <TextView
+        android:id="@+id/phoneRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="phone"
+        android:textColor="@color/primary_text"
+        />
+    <TextView
+        android:id="@+id/typeRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="type"
+        android:textColor="@color/primary_text"
+        />
+    <TextView
+        android:id="@+id/descRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Description"
+        android:textColor="@color/primary_text"
+        />
+
+</LinearLayout>

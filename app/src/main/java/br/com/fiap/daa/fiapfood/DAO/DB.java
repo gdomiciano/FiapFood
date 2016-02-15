@@ -52,4 +52,5 @@ public class DB extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESTAURANT);
         onCreate(db);
     }
+
 }

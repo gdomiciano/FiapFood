@@ -29,7 +29,7 @@ public class RestaurantsActivity extends AppCompatActivity {
 
 
         RestaurantDAO restaurantDAO = new RestaurantDAO(this);
-        RecyclerView.Adapter rvAdapter = new RestaurantAdapter(this, restaurantDAO.getRestaurants());
+        RecyclerView.Adapter rvAdapter = new RestaurantAdapter(this, restaurantDAO.getRestaurantsDAO());
         rvRestaurants.setAdapter(rvAdapter);
 
     }

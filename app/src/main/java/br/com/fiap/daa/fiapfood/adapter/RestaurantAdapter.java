@@ -3,6 +3,7 @@ package br.com.fiap.daa.fiapfood.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,10 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.List;
 
+import br.com.fiap.daa.fiapfood.DAO.RestaurantDAO;
 import br.com.fiap.daa.fiapfood.EditRestaurantActivity;
 import br.com.fiap.daa.fiapfood.R;
+import br.com.fiap.daa.fiapfood.RestaurantsActivity;
 import br.com.fiap.daa.fiapfood.model.Restaurant;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -79,6 +82,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
                 restaurant = (Restaurant) restaurants.get(position) ;
                 i.putExtra("restaurant", restaurant);
                 v.getContext().startActivity(i);
+            }
+        });
+
+        holder.ibtDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RestaurantDAO crud = new RestaurantDAO(v.getContext());
+                restaurant =  restaurants.get(position) ;
+                crud.dbDelete(restaurant);
+//                v.getContext().finish();
+                ((AppCompatActivity) v.getContext()).finish();
+                v.getContext().startActivity(new Intent(v.getContext(), RestaurantsActivity.class));
             }
         });
 

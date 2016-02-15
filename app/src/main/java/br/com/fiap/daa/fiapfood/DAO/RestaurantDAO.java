@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.google.android.gms.maps.GoogleMap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,10 +53,10 @@ public class RestaurantDAO {
         db.close();
 
         if (result == -1) {
-            return "Erro ao cadastrar Local";
+            return "Erro ao cadastrar Restaurant";
         }
 
-        return "Local inserido";
+        return "Restaurant inserido";
     }
 
     public String dbUpdate(Restaurant restaurant) {
@@ -76,13 +78,29 @@ public class RestaurantDAO {
         db.close();
 
         if (result == -1) {
-            return "Erro ao Editar Local";
+            return "Erro ao Editar Restaurant";
         }
 
-        return "Local Editado";
+        return "Restaurant Editado";
     }
 
-    public List<Restaurant> getRestaurants() {
+    public String dbDelete(Restaurant restaurant) {
+        ContentValues values = new ContentValues();
+        values.put(ID, restaurant.getId());
+        db = database.getWritableDatabase();
+
+        long result = db.delete(DB.TABLE_RESTAURANT, ID + " = " + restaurant.getId(), null);
+
+        db.close();
+
+        if (result == -1) {
+            return "Erro ao Excluir Restaurant";
+        }
+
+        return "Restaurant Editado";
+    }
+
+    public List<Restaurant> getRestaurantsDAO() {
         List<Restaurant> restaurants = new ArrayList<>();
         Cursor cursor;
 

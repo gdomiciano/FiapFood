@@ -3,7 +3,6 @@ package br.com.fiap.daa.fiapfood.service;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -111,8 +110,8 @@ public class RestaurantService extends AsyncTask<String, Void, List<Restaurant>>
         try {
             JSONArray json = new JSONArray(jsonString);
             RestaurantDAO crud = new RestaurantDAO(context);
-            if(crud.getRestaurants().isEmpty())
-                for (int i = 0; i < json.length(); i++) { //percorre os ids da lista
+            if(crud.getRestaurantsDAO().isEmpty())
+                for (int i = 0; i <= json.length(); i++) { //percorre os ids da lista
                     Restaurant restaurant = new Restaurant();
                     JSONObject json_data = json.getJSONObject(i);
                     restaurant.setName(json_data.getString("NOMERESTAURANTE"));
