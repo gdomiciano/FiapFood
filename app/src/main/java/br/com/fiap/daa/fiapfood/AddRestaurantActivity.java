@@ -18,7 +18,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -30,14 +29,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -54,7 +57,7 @@ import butterknife.OnItemSelected;
 /**
  * Created by geisy_000 on 2/13/2016.
  */
-public class AddRestaurantActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class AddRestaurantActivity extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     //Picture Vars
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
@@ -94,17 +97,28 @@ public class AddRestaurantActivity extends AppCompatActivity implements GoogleAp
 
     BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
     private String picRestaurantPath = null;
+    Double latitude;
+    Double longitude;
+    GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_form);
         ButterKnife.bind(this);
+
         btSave.setText("Add Restaurant");
+
         ArrayAdapter<CharSequence> typeAdp = ArrayAdapter.createFromResource(this, R.array.types, android.R.layout.simple_spinner_dropdown_item);
         typeAdp.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spType.setAdapter(typeAdp);
 
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.mapInput);
+        mapFragment.getMapAsync(this);
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         if (checkPlayServices()) {
             buildGoogleApiClient();
             createLocationRequest();
@@ -247,13 +261,17 @@ public class AddRestaurantActivity extends AppCompatActivity implements GoogleAp
     }
 
     private boolean checkPlayServices() {
-        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if (ConnectionResult.SUCCESS == status) {
-            return true;
-        } else {
-            GooglePlayServicesUtil.getErrorDialog(status, this, 0).show();
+        GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+        int result = googleAPI.isGooglePlayServicesAvailable(this);
+        if (result != ConnectionResult.SUCCESS) {
+            if (googleAPI.isUserResolvableError(result)) {
+                googleAPI.getErrorDialog(this, result, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            }
+
             return false;
         }
+
+        return true;
     }
 
     private void displayLocation() {
@@ -271,11 +289,13 @@ public class AddRestaurantActivity extends AppCompatActivity implements GoogleAp
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
         if (mLastLocation != null) {
-            double latitude = mLastLocation.getLatitude();
-            double longitude = mLastLocation.getLongitude();
+            latitude = mLastLocation.getLatitude();
+            longitude = mLastLocation.getLongitude();
             etRestaurantLat.setText(String.valueOf(latitude), TextView.BufferType.EDITABLE);
             etRestaurantLon.setText(String.valueOf(longitude), TextView.BufferType.EDITABLE);
-
+            LatLng currentPos = new LatLng(latitude, longitude);
+            mMap.addMarker(new MarkerOptions().position(currentPos).title("You're here!"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPos));
         } else {
 //            showSettingsAlert();
         }
@@ -320,4 +340,13 @@ public class AddRestaurantActivity extends AppCompatActivity implements GoogleAp
     }
 
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+//        displayLocation();
+//        // Add a marker in Sydney, Australia, and move the camera.
+//        LatLng currentPos = new LatLng(latitude, longitude);
+//        mMap.addMarker(new MarkerOptions().position(currentPos).title("You're here!"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPos));
+    }
 }

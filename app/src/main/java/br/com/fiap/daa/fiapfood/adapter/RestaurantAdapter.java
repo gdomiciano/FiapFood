@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.util.List;
 import br.com.fiap.daa.fiapfood.DAO.RestaurantDAO;
 import br.com.fiap.daa.fiapfood.EditRestaurantActivity;
 import br.com.fiap.daa.fiapfood.R;
+import br.com.fiap.daa.fiapfood.RestaurantDetailsActivity;
 import br.com.fiap.daa.fiapfood.RestaurantsActivity;
 import br.com.fiap.daa.fiapfood.model.Restaurant;
 import butterknife.Bind;
@@ -40,11 +42,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         @Bind(R.id.ibtDelete) ImageButton ibtDelete;
         @Bind(R.id.ibtEdit) ImageButton ibtEdit;
         @Bind(R.id.pbRestaurant)  ProgressBar pbRestaurant;
+        @Bind(R.id.card_view) CardView card;
 
 
 
         public RestaurantViewHolder(final View itemView) {
             super(itemView);
+
             ButterKnife.bind(this, itemView);
         }
 
@@ -75,11 +79,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         }else {
             holder.ivRestaurant.setImageResource(R.mipmap.ic_launcher);
         }
+
+        restaurant = restaurants.get(position) ;
         holder.ibtEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), EditRestaurantActivity.class);
-                restaurant = (Restaurant) restaurants.get(position) ;
                 i.putExtra("restaurant", restaurant);
                 v.getContext().startActivity(i);
             }
@@ -89,11 +94,20 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             @Override
             public void onClick(View v) {
                 RestaurantDAO crud = new RestaurantDAO(v.getContext());
-                restaurant =  restaurants.get(position) ;
+//                restaurant = restaurants.get(position) ;
                 crud.dbDelete(restaurant);
 //                v.getContext().finish();
                 ((AppCompatActivity) v.getContext()).finish();
                 v.getContext().startActivity(new Intent(v.getContext(), RestaurantsActivity.class));
+            }
+        });
+        holder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), RestaurantDetailsActivity.class);
+//                restaurant = restaurants.get(position) ;
+                i.putExtra("restaurant", restaurant);
+                v.getContext().startActivity(i);
             }
         });
 

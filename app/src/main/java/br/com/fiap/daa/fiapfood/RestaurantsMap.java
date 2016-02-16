@@ -25,6 +25,7 @@ public class RestaurantsMap extends FragmentActivity implements OnMapReadyCallba
     private GoogleMap mMap;
     private GoogleApiClient client;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
