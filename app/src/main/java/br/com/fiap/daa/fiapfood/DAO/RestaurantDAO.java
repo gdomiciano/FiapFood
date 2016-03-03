@@ -54,9 +54,9 @@ public class RestaurantDAO {
 
         if (result == -1) {
             return "Erro ao cadastrar Restaurant";
+        }else{
+            return "Restaurant inserido";
         }
-
-        return "Restaurant inserido";
     }
 
     public String dbUpdate(Restaurant restaurant) {

@@ -80,10 +80,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             holder.ivRestaurant.setImageResource(R.mipmap.ic_launcher);
         }
 
-        restaurant = restaurants.get(position) ;
+
         holder.ibtEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                restaurant = restaurants.get(position);
                 Intent i = new Intent(v.getContext(), EditRestaurantActivity.class);
                 i.putExtra("restaurant", restaurant);
                 v.getContext().startActivity(i);
@@ -94,7 +95,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             @Override
             public void onClick(View v) {
                 RestaurantDAO crud = new RestaurantDAO(v.getContext());
-//                restaurant = restaurants.get(position) ;
+                restaurant = restaurants.get(position) ;
                 crud.dbDelete(restaurant);
 //                v.getContext().finish();
                 ((AppCompatActivity) v.getContext()).finish();
@@ -105,7 +106,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(), RestaurantDetailsActivity.class);
-//                restaurant = restaurants.get(position) ;
+                restaurant = restaurants.get(position) ;
                 i.putExtra("restaurant", restaurant);
                 v.getContext().startActivity(i);
             }

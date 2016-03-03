@@ -64,6 +64,8 @@ public class EditRestaurantActivity extends AppCompatActivity {
     BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
     private String picRestaurantPath = null;
     Restaurant restaurant;
+    String price;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,6 @@ public class EditRestaurantActivity extends AppCompatActivity {
             etRestaurantLat.setText(restaurant.getLat(), TextView.BufferType.EDITABLE);
             etRestaurantLon.setText(restaurant.getLon(), TextView.BufferType.EDITABLE);
             etRestaurantDesc.setText(restaurant.getDescription(), TextView.BufferType.EDITABLE);
-
         }
 
     }
@@ -98,9 +99,10 @@ public class EditRestaurantActivity extends AppCompatActivity {
         if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (resultCode == RESULT_OK){
                 ivPreview.setVisibility(View.VISIBLE);
-
+                bmpOptions.inSampleSize = 8;
                 bmp = BitmapFactory.decodeFile(fileUri.getPath(),
                         bmpOptions);
+
                 showPreview(bmp);
                 picRestaurantPath = fileUri.getPath();
             }else if (resultCode == RESULT_CANCELED){
@@ -137,26 +139,44 @@ public class EditRestaurantActivity extends AppCompatActivity {
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
+    public boolean isValid(Restaurant restaurant){
+
+        if (!(tlRestaurantName.getEditText().getText().toString().equals("")) && !(tlRestaurantPrice.getEditText().getText().toString().equals(""))) {
+            restaurant.setPicture(picRestaurantPath);
+            price = tlRestaurantPrice.getEditText().getText().toString();
+            return true;
+        }else{
+            price = "0";
+            return false;
+        }
+//         tlRestaurantPrice.getEditText().getText().toString();
+
+    }
     @OnClick(R.id.btSubmit)
     public void updateRestaurant(View v){
         RestaurantDAO crud = new RestaurantDAO(v.getContext());
-        if (picRestaurantPath != null){
-            restaurant.setPicture(picRestaurantPath);
+
+        if(isValid(restaurant)){
+            if (picRestaurantPath != null){
+                restaurant.setPicture(picRestaurantPath);
+            }
+            restaurant.setName(tlRestaurantName.getEditText().getText().toString());
+            restaurant.setPhone(tlRestaurantPhone.getEditText().getText().toString());
+            restaurant.setType(spType.getSelectedItem().toString());
+            restaurant.setPrice(Double.parseDouble(tlRestaurantPrice.getEditText().getText().toString()));
+            restaurant.setLat(tlRestaurantLat.getEditText().getText().toString());
+            restaurant.setLon(tlRestaurantLon.getEditText().getText().toString());
+            restaurant.setDescription(tlRestaurantDesc.getEditText().getText().toString());
+
+            crud.dbUpdate(restaurant);
+
+            Intent i = new Intent(EditRestaurantActivity.this, RestaurantsActivity.class);
+            startActivity(i);
+            Toast.makeText(this, "Restaurant was updated!", Toast.LENGTH_SHORT).show();
+            finish();
+        }else{
+            Toast.makeText(this, "Couldn't save the Restaurant!", Toast.LENGTH_SHORT).show();
         }
-        restaurant.setName(tlRestaurantName.getEditText().getText().toString());
-        restaurant.setPhone(tlRestaurantPhone.getEditText().getText().toString());
-        restaurant.setType(spType.getSelectedItem().toString());
-        restaurant.setPrice(Double.parseDouble(tlRestaurantPrice.getEditText().getText().toString()));
-        restaurant.setLat(tlRestaurantLat.getEditText().getText().toString());
-        restaurant.setLon(tlRestaurantLon.getEditText().getText().toString());
-        restaurant.setDescription(tlRestaurantDesc.getEditText().getText().toString());
-
-        crud.dbUpdate(restaurant);
-
-        Intent i = new Intent(EditRestaurantActivity.this, RestaurantsActivity.class);
-        startActivity(i);
-        Toast.makeText(this, "Restaurant was updated!", Toast.LENGTH_SHORT).show();
-        finish();
 
     }
 

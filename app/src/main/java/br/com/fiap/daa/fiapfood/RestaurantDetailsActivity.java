@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import br.com.fiap.daa.fiapfood.DAO.RestaurantDAO;
 import br.com.fiap.daa.fiapfood.model.Restaurant;
 import butterknife.Bind;
 import butterknife.ButterKnife;

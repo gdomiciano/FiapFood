@@ -96,10 +96,11 @@ public class AddRestaurantActivity extends AppCompatActivity implements OnMapRea
     @Bind(R.id.btSubmit) Button btSave;
 
     BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
-    private String picRestaurantPath = null;
+    private String picRestaurantPath = "";
     Double latitude;
     Double longitude;
     GoogleMap mMap;
+    String price;
 
 
     @Override
@@ -122,10 +123,11 @@ public class AddRestaurantActivity extends AppCompatActivity implements OnMapRea
         if (checkPlayServices()) {
             buildGoogleApiClient();
             createLocationRequest();
-            displayLocation();
+//            displayLocation();
         }
 
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -187,29 +189,45 @@ public class AddRestaurantActivity extends AppCompatActivity implements OnMapRea
         startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
 
+    public boolean isValid(Restaurant restaurant){
+
+        if (!(tlRestaurantName.getEditText().getText().toString().equals("")) && (mLastLocation != null) && !(tlRestaurantPrice.getEditText().getText().toString().equals(""))) {
+            restaurant.setPicture(picRestaurantPath);
+            price = tlRestaurantPrice.getEditText().getText().toString();
+            return true;
+        }else{
+            if(mLastLocation == null){
+                showSettingsAlert();
+            }
+            price = "0";
+            return false;
+        }
+//         tlRestaurantPrice.getEditText().getText().toString();
+
+    }
     @OnClick(R.id.btSubmit)
     public void saveRestaurant(View v) {
         RestaurantDAO crud = new RestaurantDAO(v.getContext());
-
         Restaurant restaurant = new Restaurant();
-        if (picRestaurantPath != null) {
-            restaurant.setPicture(picRestaurantPath);
+        if(isValid(restaurant)){
+
+            restaurant.setName(tlRestaurantName.getEditText().getText().toString());
+            restaurant.setPhone(tlRestaurantPhone.getEditText().getText().toString());
+            restaurant.setType(spType.getSelectedItem().toString());
+            restaurant.setPrice(Double.parseDouble(price));
+            restaurant.setLat(tlRestaurantLat.getEditText().getText().toString());
+            restaurant.setLon(tlRestaurantLon.getEditText().getText().toString());
+            restaurant.setDescription(tlRestaurantDesc.getEditText().getText().toString());
+
+            crud.dbInsert(restaurant);
+            Intent i = new Intent(AddRestaurantActivity.this, RestaurantsActivity.class);
+            startActivity(i);
+            Toast.makeText(this, "Restaurant was saved!", Toast.LENGTH_SHORT).show();
+            finish();
+        }else{
+            Toast.makeText(this, "Couldn't save the Restaurant!", Toast.LENGTH_SHORT).show();
         }
-//        restaurant.setPicture(picRestaurantPath);
-        restaurant.setName(tlRestaurantName.getEditText().getText().toString());
-        restaurant.setPhone(tlRestaurantPhone.getEditText().getText().toString());
-        restaurant.setType(spType.getSelectedItem().toString());
-        restaurant.setPrice(Double.parseDouble(tlRestaurantPrice.getEditText().getText().toString()));
-        restaurant.setLat(tlRestaurantLat.getEditText().getText().toString());
-        restaurant.setLon(tlRestaurantLon.getEditText().getText().toString());
-        restaurant.setDescription(tlRestaurantDesc.getEditText().getText().toString());
 
-        crud.dbInsert(restaurant);
-
-        Intent i = new Intent(AddRestaurantActivity.this, RestaurantsActivity.class);
-        startActivity(i);
-        Toast.makeText(this, "Restaurant was saved!", Toast.LENGTH_SHORT).show();
-        finish();
     }
 
     @OnItemSelected(R.id.spType)
@@ -297,7 +315,7 @@ public class AddRestaurantActivity extends AppCompatActivity implements OnMapRea
             mMap.addMarker(new MarkerOptions().position(currentPos).title("You're here!"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPos));
         } else {
-//            showSettingsAlert();
+            showSettingsAlert();
         }
     }
 
@@ -316,7 +334,7 @@ public class AddRestaurantActivity extends AppCompatActivity implements OnMapRea
     }
 
     public void showSettingsAlert(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
 
         alertDialog.setTitle("GPS is settings");
@@ -324,9 +342,10 @@ public class AddRestaurantActivity extends AppCompatActivity implements OnMapRea
         alertDialog.setIcon(R.drawable.common_full_open_on_phone);
 
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
+            public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
+                dialog.dismiss();
             }
         });
 
@@ -349,4 +368,5 @@ public class AddRestaurantActivity extends AppCompatActivity implements OnMapRea
 //        mMap.addMarker(new MarkerOptions().position(currentPos).title("You're here!"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPos));
     }
+
 }

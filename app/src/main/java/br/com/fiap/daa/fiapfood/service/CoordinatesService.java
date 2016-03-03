@@ -39,13 +39,9 @@ public class CoordinatesService extends AsyncTask<String, Void, List<Restaurant>
             if(restaurants != null){
                 new RestaurantsMap().setOnMap(restaurants,map);
             }
-
         }finally {
             pd.dismiss();
-
         }
-
-
     }
 
     @Override
