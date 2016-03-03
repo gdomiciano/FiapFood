@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -60,6 +61,8 @@ public class EditRestaurantActivity extends AppCompatActivity {
     @Bind(R.id.etRestaurantLon) EditText etRestaurantLon;
     @Bind(R.id.etRestaurantDesc) EditText etRestaurantDesc;
     @Bind(R.id.btSubmit) Button btUpdate;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
     private String picRestaurantPath = null;
@@ -72,6 +75,7 @@ public class EditRestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_form);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         btUpdate.setText("Save changes");
         ArrayAdapter<CharSequence> typeAdp = ArrayAdapter.createFromResource(this, R.array.types, android.R.layout.simple_spinner_dropdown_item);
         typeAdp.setDropDownViewResource(android.R.layout.simple_spinner_item);

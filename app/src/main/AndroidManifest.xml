@@ -38,6 +38,9 @@
             android:name=".RestaurantDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".RestaurantsMap"
             android:label="@string/title_activity_restaurants_map"
             android:screenOrientation="portrait">

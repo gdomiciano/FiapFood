@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,8 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
     @Bind(R.id.phoneRestaurant) TextView restaurantPhone;
     @Bind(R.id.descRestaurant) TextView restaurantDesc;
     @Bind(R.id.ivRestaurantDetail) ImageView restaurantPicture;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     Restaurant restaurant;
 
@@ -33,6 +36,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         restaurant = (Restaurant) intent.getSerializableExtra("restaurant");
 
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         restaurantName.setText(restaurant.getName());
         restaurantPrice.setText("Average Cost: " + restaurant.getPrice());
         restaurantType.setText("Phone: " + restaurant.getPhone());

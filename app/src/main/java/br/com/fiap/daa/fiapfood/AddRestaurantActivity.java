@@ -18,6 +18,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -94,6 +95,8 @@ public class AddRestaurantActivity extends AppCompatActivity implements OnMapRea
     @Bind(R.id.etRestaurantLon) EditText etRestaurantLon;
     @Bind(R.id.etRestaurantDesc) EditText etRestaurantDesc;
     @Bind(R.id.btSubmit) Button btSave;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
     private String picRestaurantPath = "";
@@ -108,6 +111,7 @@ public class AddRestaurantActivity extends AppCompatActivity implements OnMapRea
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_form);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         btSave.setText("Add Restaurant");
 

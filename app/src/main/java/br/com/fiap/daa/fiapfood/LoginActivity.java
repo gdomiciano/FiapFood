@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.btLogin) Button btLogin;
     @Bind(R.id.info) TextView tvInfo;
     @Bind(R.id.login_button) LoginButton btFbLogin;
+    @Bind(R.id.toolbar) Toolbar toolbar;
 
     private final String PREF_NAME = "FIAPFOOD";
     private final String KEEPCONNECTED = "KEEPCONNECTED";
@@ -46,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
+        setSupportActionBar(toolbar);
         if(isConnected()){
             startApp();
         }

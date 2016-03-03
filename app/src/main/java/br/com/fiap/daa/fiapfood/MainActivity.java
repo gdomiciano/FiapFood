@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 
 import br.com.fiap.daa.fiapfood.helper.FontsManager;
@@ -20,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.btSeeAll) Button btSeeAll;
     @Bind(R.id.btSeeMap) Button btSeeMap;
     @Bind(R.id.btAbout) Button btAbout;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
 
     @Override
@@ -27,11 +32,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         Typeface iconFont = FontsManager.getTypeface(getApplicationContext(), FontsManager.FONTAWESOME);
         FontsManager.markAsIconContainer(findViewById(R.id.icons_container), iconFont);
-
-
-
 
     }
 
@@ -59,5 +62,42 @@ public class MainActivity extends AppCompatActivity {
     public void goMap(){
         Intent i = new Intent(MainActivity.this, RestaurantsMap.class);
         startActivity(i);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.mnAbout:
+                goAbout();
+                break;
+
+            case R.id.mnAddRestarant:
+                goAdd();
+                break;
+
+            case R.id.mnLogout:
+                break;
+
+            case R.id.mnSearch:
+                Intent i = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.mnSeeAll:
+                goSeeAll();
+                break;
+
+            case R.id.mnSeeMap:
+                goMap();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

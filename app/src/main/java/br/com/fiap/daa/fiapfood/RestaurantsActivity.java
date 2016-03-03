@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import br.com.fiap.daa.fiapfood.DAO.RestaurantDAO;
 import br.com.fiap.daa.fiapfood.adapter.RestaurantAdapter;
@@ -16,12 +17,15 @@ import butterknife.ButterKnife;
 public class RestaurantsActivity extends AppCompatActivity {
 
     @Bind(R.id.rvRestaurants) RecyclerView rvRestaurants;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurants);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         rvRestaurants.setHasFixedSize(true);
         RecyclerView.LayoutManager lmRestaurants = new LinearLayoutManager(this);
