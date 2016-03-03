@@ -120,7 +120,6 @@ public class RestaurantDAO {
                 restaurant.setLon(cursor.getString(cursor.getColumnIndex(LON)));
                 restaurant.setPrice(cursor.getDouble(cursor.getColumnIndex(PRICE)));
                 restaurant.setDescription(cursor.getString(cursor.getColumnIndex(DESCRIPTION)));
-
                 restaurants.add(restaurant);
             }
         }
