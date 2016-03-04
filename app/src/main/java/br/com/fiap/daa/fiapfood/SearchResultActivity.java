@@ -9,17 +9,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 import br.com.fiap.daa.fiapfood.DAO.RestaurantDAO;
 import br.com.fiap.daa.fiapfood.adapter.RestaurantAdapter;
+import br.com.fiap.daa.fiapfood.model.Restaurant;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by geisy_000 on 2/10/2016.
+ * Created by geisy_000 on 3/3/2016.
  */
-public class RestaurantsActivity extends AppCompatActivity {
+public class SearchResultActivity extends AppCompatActivity {
 
-    @Bind(R.id.rvRestaurants) RecyclerView rvRestaurants;
+    @Bind(R.id.rvRestaurants)
+    RecyclerView rvRestaurants;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
@@ -34,12 +38,12 @@ public class RestaurantsActivity extends AppCompatActivity {
         RecyclerView.LayoutManager lmRestaurants = new LinearLayoutManager(this);
         rvRestaurants.setLayoutManager(lmRestaurants);
 
-
-        RestaurantDAO restaurantDAO = new RestaurantDAO(this);
-        RecyclerView.Adapter rvAdapter = new RestaurantAdapter(this, restaurantDAO.getRestaurantsDAO());
+        List<Restaurant> restaurants = (List<Restaurant>)getIntent().getSerializableExtra("restaurants");
+        RecyclerView.Adapter rvAdapter = new RestaurantAdapter(this, restaurants);
         rvRestaurants.setAdapter(rvAdapter);
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu,menu);
@@ -82,3 +86,4 @@ public class RestaurantsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+

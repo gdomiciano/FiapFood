@@ -5,12 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.fiap.daa.fiapfood.R;
 import br.com.fiap.daa.fiapfood.model.Restaurant;
 
 /**
@@ -30,7 +32,7 @@ public class RestaurantDAO {
 
     private DB database;
     private SQLiteDatabase db;
-
+    private Context context;
     public RestaurantDAO(Context context) {
         database = new DB(context);
     }
@@ -53,9 +55,9 @@ public class RestaurantDAO {
         db.close();
 
         if (result == -1) {
-            return "Erro ao cadastrar Restaurant";
+            return "Error when tried add";
         }else{
-            return "Restaurant inserido";
+            return "Restaurant added";
         }
     }
 
@@ -78,10 +80,50 @@ public class RestaurantDAO {
         db.close();
 
         if (result == -1) {
-            return "Erro ao Editar Restaurant";
+            return context.getString(R.string.error_edit);
         }
 
-        return "Restaurant Editado";
+        return "Restaurant edited";
+    }
+
+    public List<Restaurant> dbSearch(String name, String type, String price) {
+        Cursor cursor;
+        List<Restaurant> restaurants = new ArrayList<>();
+        db = database.getReadableDatabase();
+
+        String queryString = TYPE + " = '" + type + "'";
+            if(!name.equals("")) {
+               queryString += " AND " + NAME + " LIKE '%" + name + "%' ";
+            }
+            if(!price.equals("")) {
+                queryString += " AND " + PRICE + " LIKE '%" + price + "%' ";
+            }
+
+        cursor = db.query(DB.TABLE_RESTAURANT, null, queryString, null, null, null, null);
+
+        Log.d("CURSOR",cursor.getColumnName(cursor.getColumnIndex(NAME)));
+        if (cursor != null && cursor.getColumnCount() != -1) {
+            //cursor.moveToFirst();
+            while (cursor.moveToNext()) {
+                Restaurant restaurant = new Restaurant();
+                restaurant.setId(cursor.getInt(cursor.getColumnIndex(ID)));
+                restaurant.setName(cursor.getString(cursor.getColumnIndex(NAME)));
+                restaurant.setPicture(cursor.getString(cursor.getColumnIndex(PICTURE)));
+                restaurant.setPhone(cursor.getString(cursor.getColumnIndex(PHONE)));
+                restaurant.setType(cursor.getString(cursor.getColumnIndex(TYPE)));
+                restaurant.setLat(cursor.getString(cursor.getColumnIndex(LAT)));
+                restaurant.setLon(cursor.getString(cursor.getColumnIndex(LON)));
+                restaurant.setPrice(cursor.getDouble(cursor.getColumnIndex(PRICE)));
+                restaurant.setDescription(cursor.getString(cursor.getColumnIndex(DESCRIPTION)));
+                restaurants.add(restaurant);
+            }
+        }else{
+//            Toast
+            Log.d("OI","Não Foi");
+        }
+        db.close();
+        return restaurants;
+
     }
 
     public String dbDelete(Restaurant restaurant) {
@@ -94,10 +136,10 @@ public class RestaurantDAO {
         db.close();
 
         if (result == -1) {
-            return "Erro ao Excluir Restaurant";
+            return context.getString(R.string.error_delete);
         }
 
-        return "Restaurant Editado";
+        return context.getString(R.string.success_delete);
     }
 
     public List<Restaurant> getRestaurantsDAO() {

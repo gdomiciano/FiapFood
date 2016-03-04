@@ -71,11 +71,17 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
         holder.tvRestaurantName.setText(restaurants.get(position).getName());
         holder.tvRestaurantType.setText(restaurants.get(position).getType());
-        File file = new File(restaurants.get(position).getPicture());
-        if(file.exists()){
-            String picPath = file.toString();
-            Drawable restaurantPicture = Drawable.createFromPath(picPath);
-            holder.ivRestaurant.setImageDrawable(restaurantPicture);
+
+        if(restaurants.get(position).getPicture() != null){
+
+            File file = new File(restaurants.get(position).getPicture());
+            if(file.exists()){
+                String picPath = file.toString();
+                Drawable restaurantPicture = Drawable.createFromPath(picPath);
+                holder.ivRestaurant.setImageDrawable(restaurantPicture);
+            }else {
+                holder.ivRestaurant.setImageResource(R.mipmap.ic_launcher);
+            }
         }else {
             holder.ivRestaurant.setImageResource(R.mipmap.ic_launcher);
         }

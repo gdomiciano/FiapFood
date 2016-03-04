@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fiap Food</string>
+    <string name="bt_about">Sobre</string>
+    <string name="bt_add">Adicionar  restaurante</string>
+    <string name="bt_login">Login/Cadastro</string>
+    <string name="bt_see_all">Ver todos os restaurantes</string>
+    <string name="bt_see_map">Ver restaurantes no mapa</string>
+    <string name="cb_connected">Manter-me conectado</string>
+    <string name="err_login">Usuário ou senha inválido</string>
+    <string name="get_data">Carregando dados iniciais...</string>
+    <string name="hint_password">Senha</string>
+    <string name="hint_username">Nome de Usuário</string>
+    <string name="txt_start">Faça Login ou Registre-se para iniciar!</string>
+    <string name="type_PF">PF</string>
+    <string name="type_delivery">Entrega</string>
+    <string name="type_fast_food">Fast-food</string>
+    <string name="type_nao_sei">Não Sei</string>
+    <string name="type_rodizio">Rodizio</string>
+    <string name="type_self_service">Self-Service</string>
+    <string name="type_undefined">Indefinido</string>
+    <string name="wait_title">Aguarde...</string>
+    <string name="restaurant_search">Buscar restaurante</string>
+    <string name="restaurant_name">Nome do restaurante</string>
+    <string name="restaurant_type">Tipo do restaurante</string>
+    <string name="retaurant_price">Preço do restaurante</string>
+    <string name="search">Buscar</string>
+    <string name="description">Description</string>
+    <string name="type">Type</string>
+    <string name="phone">Telefone</string>
+    <string name="price">Preço</string>
+    <string name="name">Nome</string>
+    <string name="add_restaurant">Add Restaurant</string>
+    <string name="restaurant_picture">Imagem do restaurante</string>
+    <string name="restaurant_phone">Telefone do restaurante</string>
+    <string name="restaurant_lat">Latitude do restaurante</string>
+    <string name="restaurant_lon">Longitude do restaurant</string>
+    <string name="restaurant_description">Descrição do restaurante</string>
+    <string name="restaurant_price">Preço do restaurante</string>
+    <string name="title_activity_restaurants_map"></string>
+</resources>

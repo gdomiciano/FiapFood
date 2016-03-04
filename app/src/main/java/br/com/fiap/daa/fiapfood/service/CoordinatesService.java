@@ -9,6 +9,7 @@ import com.google.android.gms.maps.GoogleMap;
 import java.util.List;
 
 import br.com.fiap.daa.fiapfood.DAO.RestaurantDAO;
+import br.com.fiap.daa.fiapfood.R;
 import br.com.fiap.daa.fiapfood.RestaurantsMap;
 import br.com.fiap.daa.fiapfood.model.Restaurant;
 
@@ -29,7 +30,7 @@ public class CoordinatesService extends AsyncTask<String, Void, List<Restaurant>
     @Override
     protected void onPreExecute() {
 //            super.onPreExecute();
-        pd = ProgressDialog.show(context, "Wait...", "Loading Restaurants...");
+        pd = ProgressDialog.show(context, context.getString(R.string.wait), "Loading Restaurants...");
     }
 
     @Override

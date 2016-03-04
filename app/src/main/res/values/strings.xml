@@ -32,4 +32,27 @@
         <item>@string/type_nao_sei</item>
     </string-array>
     <string name="title_activity_restaurants_map">FiapFood</string>
+    <string name="restaurant_search">Restaurant Search</string>
+    <string name="restaurant_name">Restaurant Name</string>
+    <string name="restaurant_type">Restaurant Type</string>
+    <string name="retaurant_price">Restaurant Price</string>
+    <string name="search">Search</string>
+    <string name="description">Description</string>
+    <string name="type">Type</string>
+    <string name="phone">Phone</string>
+    <string name="price">Price</string>
+    <string name="name">Name</string>
+    <string name="add_restaurant">Add Restaurant</string>
+    <string name="restaurant_picture">Restaurant Picture</string>
+    <string name="restaurant_phone">Restaurant Phonenumber</string>
+    <string name="restaurant_price">Restaurant Price</string>
+    <string name="restaurant_lat">Restaurant Latitude</string>
+    <string name="restaurant_lon">Restaurant Longitude</string>
+    <string name="restaurant_description">Restaurant Description</string>
+    <string name="error_delete">Error when tried to delete</string>
+    <string name="success_delete">Restaurant is changed</string>
+    <string name="error_edit">Error when tried edit.</string>
+    <string name="wait">Wait...</string>
+    <string name="success_restaurant">Restaurant is updated!</string>
+    <string name="error_update">Couldn\'t save the Restaurant!</string>
 </resources>

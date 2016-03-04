@@ -16,10 +16,27 @@
     <string name="type_PF">PF</string>
     <string name="type_self_service">Self-Service</string>
     <string name="type_undefined">Undefined</string>
-    <string name="type_nao_sei">Não Sei</string>
+    <string name="type_nao_sei">Don\'t Know</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="wait_title">Wait…</string>
     <string name="get_data">Getting initial data…</string>
+    <string name="restaurant_search">Restaurant Search</string>
+    <string name="restaurant_name">Restaurant Name</string>
+    <string name="restaurant_type">Restaurant Type</string>
+    <string name="retaurant_price">Restaurant Price</string>
+    <string name="search">Search</string>
+    <string name="description">Description</string>
+    <string name="type">Type</string>
+    <string name="phone">Phone</string>
+    <string name="price">Price</string>
+    <string name="name">Name</string>
+    <string name="add_restaurant">Add Restaurant</string>
+    <string name="restaurant_picture">Restaurant Picture</string>
+    <string name="restaurant_phone">Restaurant Phonenumber</string>
+    <string name="restaurant_lat">Restaurant Latitude</string>
+    <string name="restaurant_lon">Restaurant Longitude</string>
+    <string name="restaurant_description">Restaurant Description</string>
+    <string name="error_delete">Error when tried to delete</string>
 
     <string-array name="types">
         <item>@string/type_rodizio</item>

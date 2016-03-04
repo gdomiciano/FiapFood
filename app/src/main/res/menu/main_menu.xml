@@ -10,32 +10,33 @@
     <item
         android:id="@+id/mnAddRestarant"
         android:title="Add Restaurant"
-        android:orderInCategory="100"
+        android:orderInCategory="101"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/mnSeeAll"
         android:title="List Restaurants"
-        android:orderInCategory="100"
+        android:orderInCategory="102"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/mnSeeMap"
         android:title="Map"
-        android:orderInCategory="100"
+        android:orderInCategory="103"
         app:showAsAction="never"
         />
 
     <item
         android:id="@+id/mnLogout"
         android:title="Logout"
-        android:orderInCategory="100"
+        android:orderInCategory="104"
         app:showAsAction="never"
+        android:visible="false"
         />
     <item
         android:id="@+id/mnAbout"
         android:title="About"
-        android:orderInCategory="100"
+        android:orderInCategory="105"
         app:showAsAction="never"
         />
 </menu>

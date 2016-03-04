@@ -19,6 +19,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -318,6 +320,7 @@ public class AddRestaurantActivity extends AppCompatActivity implements OnMapRea
             LatLng currentPos = new LatLng(latitude, longitude);
             mMap.addMarker(new MarkerOptions().position(currentPos).title("You're here!"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPos));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentPos, 18.0f));
         } else {
             showSettingsAlert();
         }
@@ -372,5 +375,45 @@ public class AddRestaurantActivity extends AppCompatActivity implements OnMapRea
 //        mMap.addMarker(new MarkerOptions().position(currentPos).title("You're here!"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPos));
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Intent i;
+        switch (id){
+            case R.id.mnAbout:
+                i = new Intent(this, AboutActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.mnAddRestarant:
+                i = new Intent(this, AddRestaurantActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.mnLogout:
+                break;
+
+            case R.id.mnSearch:
+                i = new Intent(this, SearchActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.mnSeeAll:
+                i = new Intent(this, RestaurantsActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.mnSeeMap:
+                i = new Intent(this, RestaurantsMap.class);
+                startActivity(i);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

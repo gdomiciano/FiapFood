@@ -73,7 +73,7 @@ public class RestaurantService extends AsyncTask<String, Void, List<Restaurant>>
             // Read content & Log
             inputStream = httpEntity.getContent();
         } catch (UnsupportedEncodingException e1) {
-            Log.e("UnsupportedEncodingException", e1.toString());
+            Log.e("UnsuppoodingException", e1.toString());
             e1.printStackTrace();
         } catch (ClientProtocolException e2) {
             Log.e("ClientProtocolException", e2.toString());
